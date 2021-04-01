@@ -1,0 +1,26 @@
+# Run adhoc commands with AzCLI
+
+az login --use-device-code 
+
+
+# Vnet Peering
+
+az group create --name Vnet1-rg --location East US 
+
+az group create --name Vnet2-rg --location South India
+
+az network vnet create --name vnet1 --resource-group Vnet1-rg --address-prefixes 10.0.0.0/16 --subnet-name Web --subnet-prefixes 10.0.1.0/24 
+
+az network vnet create --name vnet2 --resource-group Vnet2-rg --address-prefixes 172.16.0.0/16 --subnet-name DB --subnet-prefixes 172.16.1.0/24 
+
+az network vnet peering create --name vnet1-vnet2-peer -g Vnet1-rg --vnet-name vnet1 --remote-vnet /subscriptions/fbb5d319-cf63-46d2-8172-6d25507c4d57/resourceGroups/Vnet2-rg/providers/Microsoft.Network/virtualNetworks/vnet2 --allow-vnet-access
+
+
+az network vnet peering create --name vnet2-vnet1-peer -g Vnet2-rg --vnet-name vnet2 --remote-vnet /subscriptions/fbb5d319-cf63-46d2-8172-6d25507c4d57/resourceGroups/Vnet1-rg/providers/Microsoft.Network/virtualNetworks/vnet1 --allow-vnet-access
+
+az network vnet delete --name vnet1 --resource-group Vnet1-rg 
+
+az network vnet delete --name vnet2 --resource-group Vnet2-rg
+
+az group delete --name NetworkWatcherRG --yes
+
