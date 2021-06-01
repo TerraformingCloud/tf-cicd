@@ -2,11 +2,6 @@
 # Create a Windows Server 2019 VM 
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
 
-// data "azurerm_storage_account" "sa" {
-//     name                    =   "domainpsscripts"
-//     resource_group_name     =   azure
-// }
-
 #
 # - Create a Resource Group
 #
@@ -111,8 +106,12 @@ resource "azurerm_network_interface" "nic" {
 
 
 #
-# - Create a Windows 10 Virtual Machine
+# - Create a Windows Server Virtual Machine
 #
+
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
+# Create a Windows Server 2019 VM 
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
 
 resource "azurerm_windows_virtual_machine" "vm" {
     name                              =   "${var.prefix}-vm"
